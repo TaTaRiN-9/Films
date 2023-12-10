@@ -83,6 +83,7 @@ namespace Films
                     MessageBox.Show("Пароли не совпадают!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+            database.closeConnection();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

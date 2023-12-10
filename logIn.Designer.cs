@@ -119,6 +119,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "logIn";
             this.Load += new System.EventHandler(this.logIn_Load_1);
             this.ResumeLayout(false);

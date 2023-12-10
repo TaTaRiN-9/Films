@@ -67,6 +67,9 @@
     <Compile Include="sign.Designer.cs">
       <DependentUpon>sign.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Films.resx">
+      <DependentUpon>Films.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="logIn.resx">
       <DependentUpon>logIn.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,3 +10,4 @@ C:\Users\1\source\repos\Films\obj\Debug\Films.csproj.CoreCompileInputs.cache
 C:\Users\1\source\repos\Films\obj\Debug\Films.exe
 C:\Users\1\source\repos\Films\obj\Debug\Films.pdb
 C:\Users\1\source\repos\Films\obj\Debug\Films.sign.resources
+C:\Users\1\source\repos\Films\obj\Debug\Films.Films.resources

@@ -144,6 +144,8 @@
             this.Controls.Add(this.pass);
             this.Controls.Add(this.emailUserAcc);
             this.Controls.Add(this.signUpButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "sign";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.sign_Load);
