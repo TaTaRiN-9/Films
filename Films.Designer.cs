@@ -43,11 +43,13 @@
             this.labelFilms = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonUpdateDirectors = new System.Windows.Forms.Button();
+            this.buttonDelSearchDirector = new System.Windows.Forms.Button();
+            this.searchDirector = new System.Windows.Forms.TextBox();
+            this.DirectorsLabel = new System.Windows.Forms.Label();
+            this.addNewDirector = new System.Windows.Forms.Button();
+            this.directorsData = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.filmsTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -55,6 +57,7 @@
             this.panelFilm.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.directorsData)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -129,9 +132,11 @@
             // 
             // filmsData
             // 
+            this.filmsData.AllowUserToAddRows = false;
             this.filmsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.filmsData.Location = new System.Drawing.Point(0, 91);
             this.filmsData.Name = "filmsData";
+            this.filmsData.ReadOnly = true;
             this.filmsData.RowTemplate.Height = 24;
             this.filmsData.Size = new System.Drawing.Size(726, 372);
             this.filmsData.TabIndex = 2;
@@ -165,6 +170,7 @@
             this.buttonDeleteSearch.TabIndex = 3;
             this.buttonDeleteSearch.Text = "Стереть";
             this.buttonDeleteSearch.UseVisualStyleBackColor = true;
+            this.buttonDeleteSearch.Click += new System.EventHandler(this.buttonDeleteSearch_Click);
             // 
             // buttonUpdate
             // 
@@ -189,8 +195,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.directorsData);
+            this.tabPage2.Controls.Add(this.addNewDirector);
             this.tabPage2.Controls.Add(this.panel1);
-            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -202,61 +210,86 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGray;
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.buttonUpdateDirectors);
+            this.panel1.Controls.Add(this.buttonDelSearchDirector);
+            this.panel1.Controls.Add(this.searchDirector);
+            this.panel1.Controls.Add(this.DirectorsLabel);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(730, 50);
             this.panel1.TabIndex = 1;
             // 
+            // buttonUpdateDirectors
+            // 
+            this.buttonUpdateDirectors.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUpdateDirectors.Location = new System.Drawing.Point(598, 10);
+            this.buttonUpdateDirectors.Name = "buttonUpdateDirectors";
+            this.buttonUpdateDirectors.Size = new System.Drawing.Size(101, 29);
+            this.buttonUpdateDirectors.TabIndex = 7;
+            this.buttonUpdateDirectors.Text = "Обновить";
+            this.buttonUpdateDirectors.UseVisualStyleBackColor = true;
+            this.buttonUpdateDirectors.Click += new System.EventHandler(this.buttonUpdateDirectors_Click);
+            // 
+            // buttonDelSearchDirector
+            // 
+            this.buttonDelSearchDirector.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelSearchDirector.Location = new System.Drawing.Point(416, 10);
+            this.buttonDelSearchDirector.Name = "buttonDelSearchDirector";
+            this.buttonDelSearchDirector.Size = new System.Drawing.Size(89, 29);
+            this.buttonDelSearchDirector.TabIndex = 6;
+            this.buttonDelSearchDirector.Text = "Стереть";
+            this.buttonDelSearchDirector.UseVisualStyleBackColor = true;
+            this.buttonDelSearchDirector.Click += new System.EventHandler(this.buttonDelSearchDirector_Click);
+            // 
+            // searchDirector
+            // 
+            this.searchDirector.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchDirector.Location = new System.Drawing.Point(188, 13);
+            this.searchDirector.Name = "searchDirector";
+            this.searchDirector.Size = new System.Drawing.Size(222, 26);
+            this.searchDirector.TabIndex = 5;
+            // 
+            // DirectorsLabel
+            // 
+            this.DirectorsLabel.AutoSize = true;
+            this.DirectorsLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DirectorsLabel.Location = new System.Drawing.Point(27, 13);
+            this.DirectorsLabel.Name = "DirectorsLabel";
+            this.DirectorsLabel.Size = new System.Drawing.Size(106, 23);
+            this.DirectorsLabel.TabIndex = 1;
+            this.DirectorsLabel.Text = "Режиссеры";
+            // 
+            // addNewDirector
+            // 
+            this.addNewDirector.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addNewDirector.Location = new System.Drawing.Point(37, 56);
+            this.addNewDirector.Name = "addNewDirector";
+            this.addNewDirector.Size = new System.Drawing.Size(181, 29);
+            this.addNewDirector.TabIndex = 6;
+            this.addNewDirector.Text = "Добавить режиссёра";
+            this.addNewDirector.UseVisualStyleBackColor = true;
+            this.addNewDirector.Click += new System.EventHandler(this.addNewDirector_Click);
+            // 
+            // directorsData
+            // 
+            this.directorsData.AllowUserToAddRows = false;
+            this.directorsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.directorsData.Location = new System.Drawing.Point(0, 91);
+            this.directorsData.Name = "directorsData";
+            this.directorsData.ReadOnly = true;
+            this.directorsData.RowTemplate.Height = 24;
+            this.directorsData.Size = new System.Drawing.Size(726, 372);
+            this.directorsData.TabIndex = 7;
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(416, 10);
+            this.button1.Location = new System.Drawing.Point(518, 56);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 29);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Стереть";
+            this.button1.Size = new System.Drawing.Size(181, 29);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Внести изменения";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(188, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(222, 26);
-            this.textBox1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(27, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Режиссеры";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(529, 98);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(598, 10);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 29);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Обновить";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // Films
             // 
@@ -281,6 +314,7 @@
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.directorsData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,7 +328,6 @@
         private System.Windows.Forms.TabControl filmsTable;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panelFilm;
         private System.Windows.Forms.Label labelFilms;
         private System.Windows.Forms.TextBox lineSearch;
@@ -304,9 +337,12 @@
         private System.Windows.Forms.Button addNewFilm;
         private System.Windows.Forms.Button buttonUpdateFilm;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonDelSearchDirector;
+        private System.Windows.Forms.TextBox searchDirector;
+        private System.Windows.Forms.Label DirectorsLabel;
+        private System.Windows.Forms.Button buttonUpdateDirectors;
+        private System.Windows.Forms.DataGridView directorsData;
+        private System.Windows.Forms.Button addNewDirector;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
     }
 }

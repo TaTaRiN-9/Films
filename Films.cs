@@ -14,11 +14,48 @@ namespace Films
     public partial class Films : Form
     {
         Database database = new Database();
+        private List<Film> films = new List<Film>();
 
         public Films()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+        }
+
+        private void createDirectorsData()
+        {
+            directorsData.Columns.Add("id", "id");
+            directorsData.Columns.Add("name", "Имя");
+            directorsData.Columns.Add("birthDate", "Дата рождения");
+            directorsData.Columns.Add("birthPlace", "Место рождения");
+            directorsData.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            directorsData.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            directorsData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            directorsData.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void readRowDirectors(DataGridView dataGrid, IDataRecord dataRecord)
+        {
+            dataGrid.Rows.Add(dataRecord.GetInt32(0), dataRecord.GetString(1), 
+                dataRecord.GetString(2), dataRecord.GetString(3));
+        }
+
+        private void refreshDirectorsData(DataGridView dataGrid)
+        {
+            dataGrid.Rows.Clear();
+
+            string query = "SELECT * FROM Directors";
+
+            SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+            database.openConnection();
+
+            SqlDataReader sqlDataReaderDirectors = sqlCommand.ExecuteReader();
+
+            while (sqlDataReaderDirectors.Read())
+            {
+                readRowDirectors(dataGrid, sqlDataReaderDirectors);
+            }
+            sqlDataReaderDirectors.Close();
         }
 
         private void createFilmsData()
@@ -35,30 +72,32 @@ namespace Films
             filmsData.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        private void readRow(DataGridView dataGrid, IDataRecord dataRecord)
+        private void readRowFilms(DataGridView dataGrid, IDataRecord dataRecord)
         {
 
             dataGrid.Rows.Add(dataRecord.GetInt32(0), dataRecord.GetString(1), dataRecord.GetInt32(2),
-                dataRecord.GetString(3), dataRecord.GetInt32(4));
+                dataRecord.GetString(3), dataRecord.GetString(4));
         }
 
         private void refreshFilmsData(DataGridView dataGrid)
         {
             dataGrid.Rows.Clear();
 
-            string query = $"SELECT * FROM Films";
+            string query = "SELECT Films.id as id, Films.name as name" +
+                ", Films.creationYear as creationYear, Films.style as style, " +
+                "Directors.name as nameDirectors FROM Films join Directors on " +
+                "Directors.id = Films.director_id";
 
-            SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+            SqlCommand sqlCommandFilms = new SqlCommand(query, database.GetConnection());
             database.openConnection();
 
-            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            SqlDataReader sqlDataReaderFilms = sqlCommandFilms.ExecuteReader();
 
-            while (sqlDataReader.Read())
+            while (sqlDataReaderFilms.Read())
             {
-                Console.WriteLine(sqlDataReader);
-                readRow(dataGrid, sqlDataReader);
+                readRowFilms(dataGrid, sqlDataReaderFilms);
             }
-            sqlDataReader.Close();
+            sqlDataReaderFilms.Close();
 
         }
 
@@ -70,7 +109,9 @@ namespace Films
         private void Films_Load(object sender, EventArgs e)
         {
             createFilmsData();
+            createDirectorsData();
             refreshFilmsData(filmsData);
+            refreshDirectorsData(directorsData);
         }
 
         private void addNewFilmClick(object sender, EventArgs e)
@@ -79,6 +120,26 @@ namespace Films
         }
 
         private void buttonUpdateFilm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDeleteSearch_Click(object sender, EventArgs e)
+        {
+            lineSearch.Clear();
+        }
+
+        private void buttonDelSearchDirector_Click(object sender, EventArgs e)
+        {
+            searchDirector.Clear();
+        }
+
+        private void buttonUpdateDirectors_Click(object sender, EventArgs e)
+        {
+            refreshDirectorsData(directorsData);
+        }
+
+        private void addNewDirector_Click(object sender, EventArgs e)
         {
 
         }
