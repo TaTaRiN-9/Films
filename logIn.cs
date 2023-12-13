@@ -30,24 +30,24 @@ namespace Films
 
             string query = $"SELECT id, email, password FROM test_db WHERE email='{emailUser}' and password='{password}'";
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable table = new DataTable();
-
             SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+            database.openConnection();
 
-            adapter.SelectCommand = sqlCommand;
-            adapter.Fill(table);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-            if (table.Rows.Count == 1)
+            if (sqlDataReader.HasRows)
             {
-                Films films = new Films();
+                sqlDataReader.Read();
+                int id = (int)sqlDataReader.GetValue(0);
+                Films films = new Films(id);
                 this.Hide();
                 films.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Такого аккаунта не существует!", "!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Email или пароль не совпадает!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            sqlDataReader.Close();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

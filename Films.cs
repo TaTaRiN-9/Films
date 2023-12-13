@@ -14,12 +14,13 @@ namespace Films
     public partial class Films : Form
     {
         Database database = new Database();
-        private List<Film> films = new List<Film>();
+        private int user_id;
 
-        public Films()
+        public Films(int id)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            user_id = id;
         }
 
         private void createDirectorsData()
@@ -116,7 +117,10 @@ namespace Films
 
         private void addNewFilmClick(object sender, EventArgs e)
         {
-
+            addNewFilm addNewFilm = new addNewFilm();
+            addNewFilm.ShowDialog();
+            addNewFilm.Close();
+            refreshFilmsData(filmsData);
         }
 
         private void buttonUpdateFilm_Click(object sender, EventArgs e)
@@ -141,7 +145,10 @@ namespace Films
 
         private void addNewDirector_Click(object sender, EventArgs e)
         {
-
+            addNewDirector addNewDirector1 = new addNewDirector();
+            addNewDirector1.ShowDialog();
+            addNewDirector1.Close();
+            refreshDirectorsData(directorsData);
         }
     }
 }

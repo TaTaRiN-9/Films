@@ -46,8 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addNewDirector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addNewDirector.Designer.cs">
+      <DependentUpon>addNewDirector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addNewFilm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addNewFilm.Designer.cs">
+      <DependentUpon>addNewFilm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database.cs" />
-    <Compile Include="Film.cs" />
     <Compile Include="Films.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +79,12 @@
     <Compile Include="sign.Designer.cs">
       <DependentUpon>sign.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="addNewDirector.resx">
+      <DependentUpon>addNewDirector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addNewFilm.resx">
+      <DependentUpon>addNewFilm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Films.resx">
       <DependentUpon>Films.cs</DependentUpon>
     </EmbeddedResource>

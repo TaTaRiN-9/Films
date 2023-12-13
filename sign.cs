@@ -56,10 +56,10 @@ namespace Films
                         SqlCommand command = new SqlCommand(querySignUp, database.GetConnection());
 
                         database.openConnection();
-
+                        // Если тронута одна строка, значит все успешно.
                         if (command.ExecuteNonQuery() == 1)
                         {
-                            Films films = new Films();
+                            Films films = new Films(5);
                             this.Hide();
                             films.ShowDialog();
                         }
