@@ -117,7 +117,7 @@ namespace Films
 
         private void addNewFilmClick(object sender, EventArgs e)
         {
-            addNewFilm addNewFilm = new addNewFilm();
+            addNewFilm addNewFilm = new addNewFilm(user_id);
             addNewFilm.ShowDialog();
             addNewFilm.Close();
             refreshFilmsData(filmsData);
@@ -145,7 +145,7 @@ namespace Films
 
         private void addNewDirector_Click(object sender, EventArgs e)
         {
-            addNewDirector addNewDirector1 = new addNewDirector();
+            addNewDirector addNewDirector1 = new addNewDirector(user_id);
             addNewDirector1.ShowDialog();
             addNewDirector1.Close();
             refreshDirectorsData(directorsData);

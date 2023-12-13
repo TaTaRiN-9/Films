@@ -17,12 +17,14 @@ namespace Films
         private string[] genres = new string[7] { "Фантастика", 
             "Фэнтези", "Драма", "Комедия", "Детектив", "Приключения", 
             "Мелодрама"};
+        private int user_id;
 
-        public addNewFilm()
+        public addNewFilm(int id)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Добавление фильма";
+            user_id = id;
         }
 
         private void addNewFilm_Load(object sender, EventArgs e)
@@ -59,18 +61,24 @@ namespace Films
 
                 string query = $"INSERT INTO Films(name, creationYear, style, director_id, author)" +
                     $" VALUES ('{nameFilm}', {creationYear}, '{styleFilm}', " +
-                    $"(SELECT id FROM Directors WHERE name = '{filmDirector}'), 1)";
-
-                SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
-                database.openConnection();
-
-                if (sqlCommand.ExecuteNonQuery() == 1)
+                    $"(SELECT id FROM Directors WHERE name = '{filmDirector}'), {user_id})";
+                try
                 {
-                    this.Close();
+                    SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+                    database.openConnection();
+
+                    if (sqlCommand.ExecuteNonQuery() == 1)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не получилось добавить фильм!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-                else
+                catch
                 {
-                    MessageBox.Show("Не получилось добавить фильм!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Такой фильм уже существует!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else

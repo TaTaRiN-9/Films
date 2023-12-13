@@ -14,11 +14,13 @@ namespace Films
     public partial class addNewDirector : Form
     {
         private Database database = new Database();
-        public addNewDirector()
+        private int user_id;
+        public addNewDirector(int id)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Добавление режиссёра";
+            user_id = id;
         }
 
         private void addNewDirector_Load(object sender, EventArgs e)
@@ -33,20 +35,26 @@ namespace Films
                 string nameDirector = textSurname.Text + " " + textName.Text[0] + ".";
                 string birthPlace = textCity.Text;
                 string birthDate = dateTimePickerDate.Text;
-
-                string query = $"INSERT INTO Directors(name, birthDate, birthPlace, author) " +
-                    $"VALUES ('{nameDirector}', '{birthDate}', '{birthPlace}', 5)";
-
-                SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
-                database.openConnection();
-                
-                if (sqlCommand.ExecuteNonQuery() == 1)
+                try
                 {
-                    this.Close();
+                    string query = $"INSERT INTO Directors(name, birthDate, birthPlace, author) " +
+                        $"VALUES ('{nameDirector}', '{birthDate}', '{birthPlace}', {user_id})";
+
+                    SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+                    database.openConnection();
+
+                    if (sqlCommand.ExecuteNonQuery() == 1)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не удалось добавить режиссёра!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-                else
+                catch
                 {
-                    MessageBox.Show("Не удалось добавить режиссёра!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Такой режиссёр уже существует!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             } else
             {
