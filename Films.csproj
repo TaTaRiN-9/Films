@@ -59,6 +59,7 @@
       <DependentUpon>addNewFilm.cs</DependentUpon>
     </Compile>
     <Compile Include="Database.cs" />
+    <Compile Include="Director.cs" />
     <Compile Include="Films.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +79,12 @@
     </Compile>
     <Compile Include="sign.Designer.cs">
       <DependentUpon>sign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="updateDirector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="updateDirector.Designer.cs">
+      <DependentUpon>updateDirector.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="addNewDirector.resx">
       <DependentUpon>addNewDirector.cs</DependentUpon>
@@ -102,6 +109,9 @@
     </Compile>
     <EmbeddedResource Include="sign.resx">
       <DependentUpon>sign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="updateDirector.resx">
+      <DependentUpon>updateDirector.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

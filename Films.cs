@@ -15,6 +15,7 @@ namespace Films
     {
         Database database = new Database();
         private int user_id;
+        private int selectedRowDirector;
 
         public Films(int id)
         {
@@ -39,6 +40,14 @@ namespace Films
         {
             dataGrid.Rows.Add(dataRecord.GetInt32(0), dataRecord.GetString(1), 
                 dataRecord.GetString(2), dataRecord.GetString(3));
+
+            if (dataRecord.GetInt32(4) == user_id)
+            {
+                foreach (DataGridViewCell viewCell in dataGrid.Rows[dataGrid.Rows.Count - 1].Cells)
+                {
+                    viewCell.Style.BackColor = Color.LightGreen;
+                }
+            }
         }
 
         private void refreshDirectorsData(DataGridView dataGrid)
@@ -78,6 +87,14 @@ namespace Films
 
             dataGrid.Rows.Add(dataRecord.GetInt32(0), dataRecord.GetString(1), dataRecord.GetInt32(2),
                 dataRecord.GetString(3), dataRecord.GetString(4));
+
+            if (dataRecord.GetInt32(5) == user_id)
+            {
+                foreach (DataGridViewCell viewCell in dataGrid.Rows[dataGrid.Rows.Count - 1].Cells)
+                {
+                    viewCell.Style.BackColor = Color.LightGreen;
+                }
+            }
         }
 
         private void refreshFilmsData(DataGridView dataGrid)
@@ -86,7 +103,7 @@ namespace Films
 
             string query = "SELECT Films.id as id, Films.name as name" +
                 ", Films.creationYear as creationYear, Films.style as style, " +
-                "Directors.name as nameDirectors FROM Films join Directors on " +
+                "Directors.name as nameDirectors, Films.author as author FROM Films join Directors on " +
                 "Directors.id = Films.director_id";
 
             SqlCommand sqlCommandFilms = new SqlCommand(query, database.GetConnection());
@@ -125,7 +142,7 @@ namespace Films
 
         private void buttonUpdateFilm_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void buttonDeleteSearch_Click(object sender, EventArgs e)
@@ -149,6 +166,95 @@ namespace Films
             addNewDirector1.ShowDialog();
             addNewDirector1.Close();
             refreshDirectorsData(directorsData);
+        }
+
+        private void lineSearch_TextChanged(object sender, EventArgs e)
+        {
+            filmsData.Rows.Clear();
+
+            string searchFilm = $"SELECT f.id, f.name, creationYear, style, " +
+                $"d.name as nameDirectors FROM Films f join Directors d ON " +
+                $"f.director_id = d.id WHERE concat(f.id, f.name, creationYear, " +
+                $"style, d.name) LIKE '%" + lineSearch.Text + "%'";
+            
+
+            SqlCommand sqlCommand = new SqlCommand(searchFilm, database.GetConnection());
+
+            database.openConnection();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                readRowFilms(filmsData, sqlDataReader);
+            }
+            sqlDataReader.Close();
+
+        }
+
+        private void searchDirector_TextChanged(object sender, EventArgs e)
+        {
+            directorsData.Rows.Clear();
+
+            string querySearchDirectors = $"SELECT * FROM Directors WHERE " +
+                $"concat(id, name, birthDate, birthPlace) LIKE '%" + searchDirector.Text + "%'";
+
+            SqlCommand sqlCommand = new SqlCommand(querySearchDirectors, database.GetConnection());
+
+            database.openConnection();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                readRowDirectors(directorsData, sqlDataReader);
+            }
+            sqlDataReader.Close();
+        }
+
+        private void buttonUpdateDirector_Click(object sender, EventArgs e)
+        {
+            if (selectedRowDirector >= 0)
+            {
+                Director director = directorData();
+                string query = $"SELECT author FROM Directors WHERE id = {director.Id}";
+
+                SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                sqlDataReader.Read();
+                if (user_id == (int)sqlDataReader.GetValue(0))
+                {
+                    sqlDataReader.Close();
+                    updateDirector updateDirectorForm = new updateDirector(director);
+                    updateDirectorForm.ShowDialog();
+                    updateDirectorForm.Close();
+                    refreshDirectorsData(directorsData);
+                    refreshFilmsData(filmsData);
+                }
+                else
+                {
+                    sqlDataReader.Close();
+                    MessageBox.Show("Можно удалять только те поля, которые вы создавали!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите режиссёра!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private Director directorData()
+        {
+            DataGridViewRow row = directorsData.Rows[selectedRowDirector];
+            return new Director(Convert.ToInt32(row.Cells[0].Value.ToString()),
+                row.Cells[1].Value.ToString(),
+                row.Cells[2].Value.ToString(),
+                row.Cells[3].Value.ToString());
+        }
+
+        private void directorsData_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRowDirector = e.RowIndex;
         }
     }
 }

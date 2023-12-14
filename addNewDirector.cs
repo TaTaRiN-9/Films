@@ -32,7 +32,7 @@ namespace Films
         {
             if (textCity.Text != "" && textName.Text != "" && textSurname.Text != "")
             {
-                string nameDirector = textSurname.Text + " " + textName.Text[0] + ".";
+                string nameDirector = textSurname.Text + " " + textName.Text;
                 string birthPlace = textCity.Text;
                 string birthDate = dateTimePickerDate.Text;
                 try

@@ -42,22 +42,22 @@
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.labelFilms = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonUpdateDirector = new System.Windows.Forms.Button();
+            this.directorsData = new System.Windows.Forms.DataGridView();
+            this.addNewDirector = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonUpdateDirectors = new System.Windows.Forms.Button();
             this.buttonDelSearchDirector = new System.Windows.Forms.Button();
             this.searchDirector = new System.Windows.Forms.TextBox();
             this.DirectorsLabel = new System.Windows.Forms.Label();
-            this.addNewDirector = new System.Windows.Forms.Button();
-            this.directorsData = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.filmsTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filmsData)).BeginInit();
             this.panelFilm.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.directorsData)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -160,6 +160,7 @@
             this.lineSearch.Name = "lineSearch";
             this.lineSearch.Size = new System.Drawing.Size(222, 26);
             this.lineSearch.TabIndex = 4;
+            this.lineSearch.TextChanged += new System.EventHandler(this.lineSearch_TextChanged);
             // 
             // buttonDeleteSearch
             // 
@@ -195,7 +196,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.buttonUpdateDirector);
             this.tabPage2.Controls.Add(this.directorsData);
             this.tabPage2.Controls.Add(this.addNewDirector);
             this.tabPage2.Controls.Add(this.panel1);
@@ -206,6 +207,40 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Режиссёры";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonUpdateDirector
+            // 
+            this.buttonUpdateDirector.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUpdateDirector.Location = new System.Drawing.Point(518, 56);
+            this.buttonUpdateDirector.Name = "buttonUpdateDirector";
+            this.buttonUpdateDirector.Size = new System.Drawing.Size(181, 29);
+            this.buttonUpdateDirector.TabIndex = 8;
+            this.buttonUpdateDirector.Text = "Внести изменения";
+            this.buttonUpdateDirector.UseVisualStyleBackColor = true;
+            this.buttonUpdateDirector.Click += new System.EventHandler(this.buttonUpdateDirector_Click);
+            // 
+            // directorsData
+            // 
+            this.directorsData.AllowUserToAddRows = false;
+            this.directorsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.directorsData.Location = new System.Drawing.Point(0, 91);
+            this.directorsData.Name = "directorsData";
+            this.directorsData.ReadOnly = true;
+            this.directorsData.RowTemplate.Height = 24;
+            this.directorsData.Size = new System.Drawing.Size(726, 372);
+            this.directorsData.TabIndex = 7;
+            this.directorsData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.directorsData_CellClick);
+            // 
+            // addNewDirector
+            // 
+            this.addNewDirector.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addNewDirector.Location = new System.Drawing.Point(37, 56);
+            this.addNewDirector.Name = "addNewDirector";
+            this.addNewDirector.Size = new System.Drawing.Size(181, 29);
+            this.addNewDirector.TabIndex = 6;
+            this.addNewDirector.Text = "Добавить режиссёра";
+            this.addNewDirector.UseVisualStyleBackColor = true;
+            this.addNewDirector.Click += new System.EventHandler(this.addNewDirector_Click);
             // 
             // panel1
             // 
@@ -248,6 +283,7 @@
             this.searchDirector.Name = "searchDirector";
             this.searchDirector.Size = new System.Drawing.Size(222, 26);
             this.searchDirector.TabIndex = 5;
+            this.searchDirector.TextChanged += new System.EventHandler(this.searchDirector_TextChanged);
             // 
             // DirectorsLabel
             // 
@@ -258,38 +294,6 @@
             this.DirectorsLabel.Size = new System.Drawing.Size(106, 23);
             this.DirectorsLabel.TabIndex = 1;
             this.DirectorsLabel.Text = "Режиссеры";
-            // 
-            // addNewDirector
-            // 
-            this.addNewDirector.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addNewDirector.Location = new System.Drawing.Point(37, 56);
-            this.addNewDirector.Name = "addNewDirector";
-            this.addNewDirector.Size = new System.Drawing.Size(181, 29);
-            this.addNewDirector.TabIndex = 6;
-            this.addNewDirector.Text = "Добавить режиссёра";
-            this.addNewDirector.UseVisualStyleBackColor = true;
-            this.addNewDirector.Click += new System.EventHandler(this.addNewDirector_Click);
-            // 
-            // directorsData
-            // 
-            this.directorsData.AllowUserToAddRows = false;
-            this.directorsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.directorsData.Location = new System.Drawing.Point(0, 91);
-            this.directorsData.Name = "directorsData";
-            this.directorsData.ReadOnly = true;
-            this.directorsData.RowTemplate.Height = 24;
-            this.directorsData.Size = new System.Drawing.Size(726, 372);
-            this.directorsData.TabIndex = 7;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Book Antiqua", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(518, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(181, 29);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Внести изменения";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // Films
             // 
@@ -312,9 +316,9 @@
             this.panelFilm.ResumeLayout(false);
             this.panelFilm.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.directorsData)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.directorsData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,6 +347,6 @@
         private System.Windows.Forms.Button buttonUpdateDirectors;
         private System.Windows.Forms.DataGridView directorsData;
         private System.Windows.Forms.Button addNewDirector;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonUpdateDirector;
     }
 }
