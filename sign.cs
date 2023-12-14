@@ -59,7 +59,17 @@ namespace Films
                         // Если тронута одна строка, значит все успешно.
                         if (command.ExecuteNonQuery() == 1)
                         {
-                            Films films = new Films(5);
+                            database.closeConnection();
+
+                            string query = $"SELECT id FROM test_db WHERE email = '{emailUser}'";
+
+                            SqlCommand sqlCommand1 = new SqlCommand(query, database.GetConnection());
+                            database.openConnection();
+                            SqlDataReader sqlDataReader = sqlCommand1.ExecuteReader();
+                            sqlDataReader.Read();
+                            int id = (int)sqlDataReader.GetValue(0);
+
+                            Films films = new Films(id);
                             this.Hide();
                             films.ShowDialog();
                         }

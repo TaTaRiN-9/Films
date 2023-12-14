@@ -30,7 +30,6 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filmsTable = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonUpdateFilm = new System.Windows.Forms.Button();
@@ -50,6 +49,7 @@
             this.buttonDelSearchDirector = new System.Windows.Forms.Button();
             this.searchDirector = new System.Windows.Forms.TextBox();
             this.DirectorsLabel = new System.Windows.Forms.Label();
+            this.выйтиИзАккаунтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.filmsTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -63,8 +63,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(734, 24);
@@ -73,15 +72,11 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выйтиИзАккаунтаToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.fileToolStripMenuItem.Text = "Аккаунт";
             // 
             // filmsTable
             // 
@@ -295,6 +290,13 @@
             this.DirectorsLabel.TabIndex = 1;
             this.DirectorsLabel.Text = "Режиссеры";
             // 
+            // выйтиИзАккаунтаToolStripMenuItem
+            // 
+            this.выйтиИзАккаунтаToolStripMenuItem.Name = "выйтиИзАккаунтаToolStripMenuItem";
+            this.выйтиИзАккаунтаToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.выйтиИзАккаунтаToolStripMenuItem.Text = "Выйти из аккаунта";
+            this.выйтиИзАккаунтаToolStripMenuItem.Click += new System.EventHandler(this.leaveFromAccountToolStripMenuItem_Click);
+            // 
             // Films
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,7 +330,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.TabControl filmsTable;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -348,5 +349,6 @@
         private System.Windows.Forms.DataGridView directorsData;
         private System.Windows.Forms.Button addNewDirector;
         private System.Windows.Forms.Button buttonUpdateDirector;
+        private System.Windows.Forms.ToolStripMenuItem выйтиИзАккаунтаToolStripMenuItem;
     }
 }

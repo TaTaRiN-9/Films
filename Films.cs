@@ -256,5 +256,12 @@ namespace Films
         {
             selectedRowDirector = e.RowIndex;
         }
+
+        private void leaveFromAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logIn logIn = new logIn("Вход в систему");
+            logIn.Show();
+            this.Hide();
+        }
     }
 }
