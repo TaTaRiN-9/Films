@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выйтиИзАккаунтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filmsTable = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonUpdateFilm = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.buttonDelSearchDirector = new System.Windows.Forms.Button();
             this.searchDirector = new System.Windows.Forms.TextBox();
             this.DirectorsLabel = new System.Windows.Forms.Label();
-            this.выйтиИзАккаунтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.filmsTable.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -77,6 +77,13 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.fileToolStripMenuItem.Text = "Аккаунт";
+            // 
+            // выйтиИзАккаунтаToolStripMenuItem
+            // 
+            this.выйтиИзАккаунтаToolStripMenuItem.Name = "выйтиИзАккаунтаToolStripMenuItem";
+            this.выйтиИзАккаунтаToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.выйтиИзАккаунтаToolStripMenuItem.Text = "Выйти из аккаунта";
+            this.выйтиИзАккаунтаToolStripMenuItem.Click += new System.EventHandler(this.leaveFromAccountToolStripMenuItem_Click);
             // 
             // filmsTable
             // 
@@ -135,6 +142,7 @@
             this.filmsData.RowTemplate.Height = 24;
             this.filmsData.Size = new System.Drawing.Size(726, 372);
             this.filmsData.TabIndex = 2;
+            this.filmsData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.filmsData_CellClick);
             // 
             // panelFilm
             // 
@@ -289,13 +297,6 @@
             this.DirectorsLabel.Size = new System.Drawing.Size(106, 23);
             this.DirectorsLabel.TabIndex = 1;
             this.DirectorsLabel.Text = "Режиссеры";
-            // 
-            // выйтиИзАккаунтаToolStripMenuItem
-            // 
-            this.выйтиИзАккаунтаToolStripMenuItem.Name = "выйтиИзАккаунтаToolStripMenuItem";
-            this.выйтиИзАккаунтаToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.выйтиИзАккаунтаToolStripMenuItem.Text = "Выйти из аккаунта";
-            this.выйтиИзАккаунтаToolStripMenuItem.Click += new System.EventHandler(this.leaveFromAccountToolStripMenuItem_Click);
             // 
             // Films
             // 

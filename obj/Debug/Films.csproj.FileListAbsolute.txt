@@ -14,3 +14,4 @@ C:\Users\1\source\repos\Films\obj\Debug\Films.Films.resources
 C:\Users\1\source\repos\Films\obj\Debug\Films.addNewFilm.resources
 C:\Users\1\source\repos\Films\obj\Debug\Films.addNewDirector.resources
 C:\Users\1\source\repos\Films\obj\Debug\Films.updateDirector.resources
+C:\Users\1\source\repos\Films\obj\Debug\Films.updateFilm.resources

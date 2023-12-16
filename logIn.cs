@@ -40,7 +40,6 @@ namespace Films
                 sqlDataReader.Read();
                 int id = (int)sqlDataReader.GetValue(0);
                 Films films = new Films(id);
-                
                 films.Show();
                 this.Hide();
             }

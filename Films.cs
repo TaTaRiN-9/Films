@@ -16,6 +16,7 @@ namespace Films
         Database database = new Database();
         private int user_id;
         private int selectedRowDirector;
+        private int selectedRowFilm;
 
         public Films(int id)
         {
@@ -142,7 +143,59 @@ namespace Films
 
         private void buttonUpdateFilm_Click(object sender, EventArgs e)
         {
-            
+            if (selectedRowFilm >= 0)
+            {
+                Film film = filmData();
+                string query = $"SELECT author FROM Films WHERE id = {film.Id}";
+
+                SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+                database.openConnection();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                sqlDataReader.Read();
+                if (user_id == (int)sqlDataReader.GetValue(0))
+                {
+                    sqlDataReader.Close();
+                    updateFilm updateFilmForm = new updateFilm(film);
+                    updateFilmForm.ShowDialog();
+                    updateFilmForm.Close();
+                    refreshDirectorsData(directorsData);
+                    refreshFilmsData(filmsData);
+                }
+                else
+                {
+                    sqlDataReader.Close();
+                    MessageBox.Show("Можно удалять только те поля, которые вы создавали!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите режиссёра!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private Film filmData()
+        {
+            DataGridViewRow row = filmsData.Rows[selectedRowFilm];
+            int id = Convert.ToInt32(row.Cells[0].Value.ToString());
+            string name = row.Cells[1].Value.ToString();
+            int creationYear = Convert.ToInt32(row.Cells[2].Value.ToString());
+            string style = row.Cells[3].Value.ToString();
+            string nameDirector = row.Cells[4].Value.ToString();
+
+            string query = $"SELECT id FROM Directors WHERE name = '{nameDirector}'";
+            SqlCommand sqlCommand = new SqlCommand(query, database.GetConnection());
+            database.openConnection();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            sqlDataReader.Read();
+
+            int director_id = Convert.ToInt32(sqlDataReader.GetValue(0));
+            sqlDataReader.Close();
+            return new Film(id,
+                name,
+                creationYear,
+                style,
+                director_id);
         }
 
         private void buttonDeleteSearch_Click(object sender, EventArgs e)
@@ -262,6 +315,11 @@ namespace Films
             logIn logIn = new logIn("Вход в систему");
             logIn.Show();
             this.Hide();
+        }
+
+        private void filmsData_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRowFilm = e.RowIndex;
         }
     }
 }
