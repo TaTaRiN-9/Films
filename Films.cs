@@ -14,15 +14,15 @@ namespace Films
     public partial class Films : Form
     {
         Database database = new Database();
-        private int user_id;
+        private OrdinaryUser user;
         private int selectedRowDirector;
         private int selectedRowFilm;
 
-        public Films(int id)
+        public Films(OrdinaryUser user)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            user_id = id;
+            this.user = user;
         }
 
         private void createDirectorsData()
@@ -42,7 +42,7 @@ namespace Films
             dataGrid.Rows.Add(dataRecord.GetInt32(0), dataRecord.GetString(1), 
                 dataRecord.GetString(2), dataRecord.GetString(3));
 
-            if (dataRecord.GetInt32(4) == user_id)
+            if (dataRecord.GetInt32(4) == user.Id)
             {
                 foreach (DataGridViewCell viewCell in dataGrid.Rows[dataGrid.Rows.Count - 1].Cells)
                 {
@@ -89,7 +89,7 @@ namespace Films
             dataGrid.Rows.Add(dataRecord.GetInt32(0), dataRecord.GetString(1), dataRecord.GetInt32(2),
                 dataRecord.GetString(3), dataRecord.GetString(4));
 
-            if (dataRecord.GetInt32(5) == user_id)
+            if (dataRecord.GetInt32(5) == user.Id)
             {
                 foreach (DataGridViewCell viewCell in dataGrid.Rows[dataGrid.Rows.Count - 1].Cells)
                 {
@@ -135,7 +135,7 @@ namespace Films
 
         private void addNewFilmClick(object sender, EventArgs e)
         {
-            addNewFilm addNewFilm = new addNewFilm(user_id);
+            addNewFilm addNewFilm = user.addNewFilm();
             addNewFilm.ShowDialog();
             addNewFilm.Close();
             refreshFilmsData(filmsData);
@@ -153,10 +153,11 @@ namespace Films
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                 sqlDataReader.Read();
-                if (user_id == (int)sqlDataReader.GetValue(0))
+                if (user.Id == (int)sqlDataReader.GetValue(0) || Array.Exists(Admin.adminsID, element => element == user.Id))
                 {
                     sqlDataReader.Close();
-                    updateFilm updateFilmForm = new updateFilm(film);
+                    // создаем окно редактирования данных о фильме
+                    updateFilm updateFilmForm = user.updateFilm(film);
                     updateFilmForm.ShowDialog();
                     updateFilmForm.Close();
                     refreshDirectorsData(directorsData);
@@ -215,7 +216,7 @@ namespace Films
 
         private void addNewDirector_Click(object sender, EventArgs e)
         {
-            addNewDirector addNewDirector1 = new addNewDirector(user_id);
+            addNewDirector addNewDirector1 = user.addNewDirector();
             addNewDirector1.ShowDialog();
             addNewDirector1.Close();
             refreshDirectorsData(directorsData);
@@ -275,10 +276,10 @@ namespace Films
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                 sqlDataReader.Read();
-                if (user_id == (int)sqlDataReader.GetValue(0))
+                if (user.Id == (int)sqlDataReader.GetValue(0) || Array.Exists(Admin.adminsID, element => element == user.Id))
                 {
                     sqlDataReader.Close();
-                    updateDirector updateDirectorForm = new updateDirector(director);
+                    updateDirector updateDirectorForm = user.updateDirector(director);
                     updateDirectorForm.ShowDialog();
                     updateDirectorForm.Close();
                     refreshDirectorsData(directorsData);

@@ -19,12 +19,21 @@ namespace Films
             "Фэнтези", "Драма", "Комедия", "Детектив", "Приключения",
             "Мелодрама"};
         private Film film;
+        private int adminId = 0;
         public updateFilm(Film film)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Изменение фильма";
             this.film = film;
+        }
+
+        public updateFilm(Film film, int id) : this(film)
+        {
+            InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+            this.Text = "Изменение фильма";
+            this.adminId = id;
         }
 
         private void buttonUpdateFilm_Click(object sender, EventArgs e)

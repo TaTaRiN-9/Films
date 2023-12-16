@@ -39,7 +39,8 @@ namespace Films
             {
                 sqlDataReader.Read();
                 int id = (int)sqlDataReader.GetValue(0);
-                Films films = new Films(id);
+                OrdinaryUser ordinaryUser = new OrdinaryUser(id);
+                Films films = new Films(ordinaryUser);
                 films.Show();
                 this.Hide();
             }

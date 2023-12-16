@@ -58,6 +58,7 @@
     <Compile Include="addNewFilm.Designer.cs">
       <DependentUpon>addNewFilm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Director.cs" />
     <Compile Include="Film.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="logIn.Designer.cs">
       <DependentUpon>logIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrdinaryUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sign.cs">
@@ -93,6 +95,7 @@
     <Compile Include="updateFilm.Designer.cs">
       <DependentUpon>updateFilm.cs</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="addNewDirector.resx">
       <DependentUpon>addNewDirector.cs</DependentUpon>
     </EmbeddedResource>

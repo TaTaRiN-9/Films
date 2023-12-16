@@ -68,8 +68,9 @@ namespace Films
                             SqlDataReader sqlDataReader = sqlCommand1.ExecuteReader();
                             sqlDataReader.Read();
                             int id = (int)sqlDataReader.GetValue(0);
+                            OrdinaryUser ordinaryUser = new OrdinaryUser(id);
 
-                            Films films = new Films(id);
+                            Films films = new Films(ordinaryUser);
                             this.Hide();
                             films.ShowDialog();
                         }
